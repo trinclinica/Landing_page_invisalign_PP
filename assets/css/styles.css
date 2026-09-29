@@ -1,0 +1,579 @@
+/*
+ * Dra. Patrícia Peclat — landing Invisalign
+ * CSS próprio do projeto.
+ *
+ * 1. Tokens     2. Base     3. Componentes     4. Seções     5. Responsivo
+ */
+
+/* ============ 1. Tokens ============ */
+:root {
+  --gold: #CCC084;
+  --gold-light: #E4D8A8;
+  --gold-gradient: linear-gradient(135deg, #E4D8A8 0%, #CCC084 48%, #B39B5F 100%);
+  --porcelain: #FAF9F7;
+  --champagne: #F2ECE1;
+  --black: #181614;
+  --black-soft: #1D1A17;
+  --black-deep: #121010;
+  --black-footer: #0E0C0B;
+  --panel: #221E1B;
+  --line: rgba(204, 192, 132, 0.18);
+  --line-strong: rgba(204, 192, 132, 0.45);
+
+  --text-on-dark: rgba(250, 249, 247, 0.84);
+  --text-on-light: #4A433C;
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Montserrat", Arial, sans-serif;
+
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --shadow-dark: 0 22px 50px rgba(0, 0, 0, 0.35);
+  --shadow-light: 0 18px 44px rgba(24, 22, 20, 0.12);
+
+  --space-section: clamp(72px, 8vw, 120px);
+  --space-band: clamp(56px, 6vw, 88px);
+  --container: 1140px;
+}
+
+/* ============ 2. Base ============ */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--text-on-dark);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; height: auto; }
+figure { margin: 0; }
+p { margin: 0 0 0.9em; }
+p:last-child { margin-bottom: 0; }
+b { font-weight: 600; color: var(--porcelain); }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.container { max-width: var(--container); margin-inline: auto; padding: 10px; }
+.duas-colunas { display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; align-items: center; }
+.duas-colunas > * { min-width: 0; }
+.duas-colunas--topo { align-items: start; }
+
+/* Títulos */
+.titulo, .subtitulo, .hero__titulo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: 0.005em;
+  color: #fff;
+}
+.titulo { font-size: clamp(30px, 3.1vw, 44px); }
+.titulo--centro { text-align: center; }
+.subtitulo { font-size: clamp(25px, 2.2vw, 32px); }
+
+/* Seções */
+.secao { padding-block: var(--space-section); background: var(--black); }
+.secao--escura-suave { background: var(--black-soft); }
+.secao--clara { background: var(--porcelain); color: var(--text-on-light); }
+.secao--clara .titulo { color: var(--black); }
+.secao--clara b { color: var(--black); }
+
+/* ============ 3. Componentes ============ */
+
+/* Ícones */
+.icone { display: inline-block; width: 1em; height: 1em; fill: currentColor; flex: none; }
+
+/* Botões */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45em;
+  padding: 16px 32px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--gold-gradient);
+  color: var(--black);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 10px 28px rgba(204, 192, 132, 0.18);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+.botao .icone { font-size: 1.05em; }
+.botao:hover, .botao:focus-visible { transform: translateY(-2px); filter: brightness(1.04); box-shadow: 0 14px 34px rgba(204, 192, 132, 0.28); }
+.botao:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.botao--escuro { background: var(--black); color: var(--porcelain); box-shadow: 0 10px 26px rgba(24, 22, 20, 0.18); }
+.botao--contorno { background: transparent; color: var(--black); border-color: var(--black); box-shadow: none; }
+.botao--contorno:hover, .botao--contorno:focus-visible { background: var(--black); color: var(--porcelain); }
+.acao { text-align: center; margin-top: 48px; }
+
+/* Marca (monograma + nome) */
+.marca { display: flex; align-items: center; gap: 22px; }
+.marca__monograma { width: 104px; height: 104px; object-fit: contain; }
+.marca__nome { display: block; height: 62px; width: auto; }
+
+/* Listas com ícone (comparativo) */
+.lista-icones li { display: flex; align-items: center; gap: 12px; padding-block: 7px; font-size: 16px; line-height: 1.7; }
+.lista-icones li > .icone {
+  width: 26px; height: 26px; padding: 7px; border-radius: 50%; box-sizing: border-box;
+}
+.lista-icones--negativa .icone { color: #E0574B; background: rgba(214, 72, 60, 0.14); border: 1px solid rgba(214, 72, 60, 0.35); }
+.lista-icones--positiva .icone { color: var(--gold); background: rgba(204, 192, 132, 0.14); border: 1px solid var(--line-strong); padding: 7.5px; }
+
+/* Lista com pontos (rodapé de contatos) */
+.lista-pontos li { padding-block: 5px; line-height: 1.7; }
+.lista-pontos a { display: inline-flex; align-items: baseline; gap: 10px; text-decoration: none; transition: color 0.2s ease; }
+.lista-pontos a::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex: none; transform: translateY(-2px); }
+.lista-pontos a:hover { color: var(--gold); }
+
+/* ============ 4. Seções ============ */
+
+/* --- Menu --- */
+.topo { background: rgba(18, 16, 16, 0.96); border-bottom: 1px solid var(--line); }
+.menu { max-width: var(--container); margin-inline: auto; padding: 10px; }
+.menu__botao { display: none; }
+.menu__lista { display: flex; justify-content: center; }
+.menu__lista li { position: relative; display: flex; align-items: center; }
+.menu__lista li + li::before { content: ""; position: absolute; left: 0; top: 50%; width: 1px; height: 14px; margin-top: -7px; background: rgba(204, 192, 132, 0.35); }
+.menu__lista a {
+  position: relative;
+  display: block;
+  padding: 13px 42px;
+  color: #E9E3D6;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.menu__lista a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+  background: var(--gold); opacity: 0; transition: opacity 0.3s ease;
+}
+.menu__lista a:hover { color: var(--gold); }
+.menu__lista a:hover::after { opacity: 1; }
+
+/* --- Abertura --- */
+.hero {
+  background: var(--black) url("../img/hero/hero-desktop.webp") right center / cover no-repeat;
+  padding-top: clamp(56px, 7vw, 104px);
+  padding-bottom: clamp(88px, 10vw, 150px);
+}
+.hero__conteudo { max-width: 550px; }
+.hero__titulo { margin-top: 28px; font-size: clamp(38px, 4.4vw, 60px); line-height: 1.06; }
+.hero__texto { max-width: 520px; margin: 20px 0 0; font-size: 17.5px; }
+.hero .botao { margin-top: 20px; }
+
+/* --- Equipe --- */
+.equipe__texto .titulo { margin-bottom: 20px; }
+.equipe__foto img {
+  width: 100%; max-width: 420px; margin: -26px auto -10px;
+  aspect-ratio: 294 / 416; object-fit: cover;
+  border-radius: var(--radius-md); box-shadow: var(--shadow-light);
+}
+
+/* --- Comparativo --- */
+.comparativo .titulo { margin-bottom: 70px; }
+.comparativo__cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.card-comparativo {
+  padding: 28px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+}
+.card-comparativo__midia {
+  display: flex; align-items: center; justify-content: center;
+  aspect-ratio: 16 / 10;
+  margin: 18px 0 20px;
+  border-radius: var(--radius-sm);
+  background: radial-gradient(ellipse at center, rgba(250, 249, 247, 0.07) 0%, rgba(250, 249, 247, 0) 70%);
+}
+.card-comparativo__img { width: auto; height: auto; object-fit: contain; }
+.card-comparativo__img--larga { max-width: 96%; max-height: 60%; }
+.card-comparativo__img--alta { max-width: 70%; max-height: 90%; }
+
+/* --- Casos tratáveis (comparadores) --- */
+.casos__intro { max-width: 720px; margin: 20px auto 0; text-align: center; }
+.casos__grade { display: grid; grid-template-columns: repeat(3, 1fr); row-gap: 60px; margin-top: 51px; }
+.caso { padding-inline: 30px; }
+.caso__nome {
+  margin-top: 26px;
+  color: var(--gold-light);
+  font-size: 13px;
+  line-height: 1.7;
+  letter-spacing: 0.14em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Comparador antes/depois: dois renders sobrepostos, recortados pela posição do slider (--pos) */
+.comparador {
+  --pos: 15%;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: #170e07;           /* mesma cor do fundo dos renders */
+  box-shadow: var(--shadow-dark);
+  cursor: ew-resize;
+  touch-action: pan-y;          /* arraste horizontal no slider; scroll vertical livre no celular */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.comparador__img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: contain; pointer-events: none; }
+/* À esquerda da linha: depois; à direita: antes. O depois aceita um ajuste de registro (--dx/--dy) */
+.comparador__depois {
+  transform: translate(var(--dx, 0%), var(--dy, 0%));
+  clip-path: inset(0 calc(100% - var(--pos) + var(--dx, 0%)) 0 0);
+}
+.comparador__antes { clip-path: inset(0 0 0 var(--pos)); }
+.comparador__linha {
+  position: absolute; top: 0; bottom: 0; left: var(--pos);
+  width: 2px; margin-left: -1px;
+  background: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+.comparador__controle {
+  position: absolute; top: 50%; left: var(--pos);
+  width: 48px; height: 48px; margin: -24px 0 0 -24px; padding: 0;
+  border: 0; border-radius: 50%;
+  background: #fff; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  cursor: ew-resize;
+  transition: transform 0.2s ease;
+}
+.comparador__controle span::before,
+.comparador__controle span::after {
+  content: ""; position: absolute; top: 50%; margin-top: -6px;
+  border: 6px solid transparent;
+}
+.comparador__controle span::before { left: 9px; border-right: 7px solid var(--black); border-left-width: 0; }
+.comparador__controle span::after { right: 9px; border-left: 7px solid var(--black); border-right-width: 0; }
+.comparador.is-arrastando .comparador__controle, .comparador__controle:hover { transform: scale(1.06); }
+.comparador__controle:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+/* --- Faixas de chamada (champanhe) --- */
+.faixa { padding-block: var(--space-band); background: linear-gradient(180deg, #F5F0E6 0%, var(--champagne) 100%); color: var(--text-on-light); }
+.faixa .titulo { color: var(--black); }
+.faixa__conteudo { text-align: center; }
+.faixa__conteudo .botao { margin-top: 21px; }
+.faixa__texto .botao { margin-top: 20px; }
+.faixa__foto img { width: 100%; max-width: 440px; margin-inline: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius-md); box-shadow: var(--shadow-light); }
+
+/* --- Depoimentos --- */
+.depoimentos__intro { margin-top: 20px; text-align: center; }
+.depoimentos__grade { display: grid; grid-template-columns: repeat(3, minmax(0, 340px)); justify-content: center; gap: 40px; margin-top: 31px; }
+.depoimentos__grade img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-md); box-shadow: var(--shadow-dark); }
+.depoimentos .acao { margin-top: 38px; }
+
+/* --- Etapas --- */
+.etapas__intro { margin-top: 20px; text-align: center; }
+.etapa { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; align-items: center; }
+.etapas__intro + .etapa { margin-top: 67px; }
+.etapa__foto img { width: 100%; max-width: 420px; margin-inline: auto; transition: transform 0.3s ease; }
+.etapa__foto img:hover { transform: scale(1.1); }
+.etapa__texto .subtitulo { margin-bottom: 20px; }
+.etapa--invertida .etapa__foto { order: 2; }
+.seta { display: flex; justify-content: center; padding: 28px 0; color: var(--gold); }
+.seta .icone { width: 45px; height: 45px; animation: seta 2s ease-in-out infinite; }
+@keyframes seta { 0%, 100% { transform: translateY(-8%); } 50% { transform: translateY(6%); } }
+@media (prefers-reduced-motion: reduce) { .seta .icone { animation: none; } }
+.acao--etapas { margin-top: 44px; margin-bottom: 75px; }
+
+/* --- Crianças e adolescentes --- */
+.criancas {
+  background:
+    linear-gradient(100deg, transparent 55.6%, var(--gold) 55.6%, var(--gold) 55.8%, transparent 55.8%),
+    linear-gradient(100deg, var(--porcelain) 55.7%, transparent 55.7%),
+    url("../img/criancas/crianca-dra-patricia.webp") right 0 top 32% / 46% auto no-repeat,
+    var(--porcelain);
+  min-height: 560px;
+  display: flex; align-items: center;
+}
+.criancas > .container { width: 100%; }
+.criancas__texto .titulo { margin-bottom: 20px; }
+.criancas__texto p { max-width: 460px; }
+.criancas__texto .botao { margin-top: 20px; }
+.criancas__foto { display: none; }
+.criancas__foto img { width: 100%; aspect-ratio: 1200 / 857; object-fit: cover; border-radius: var(--radius-md); box-shadow: var(--shadow-light); }
+
+/* --- Benefícios --- */
+.beneficios__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
+.card-beneficio {
+  padding: 36px 26px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+.card-beneficio--destaque { background: linear-gradient(180deg, #2A2520 0%, var(--panel) 100%); border-color: var(--line-strong); }
+.card-beneficio .icone { width: 84px; height: 84px; color: var(--gold); margin-bottom: 20px; }
+.beneficios .acao { margin-top: 28px; }
+
+/* --- Dra. Patrícia --- */
+.doutora__conteudo { margin-top: 30px; }
+.assinatura { display: block; width: 300px; height: 50px; margin-bottom: 20px; }
+.doutora__texto { align-self: start; padding-top: 9px; }
+.destaque { color: var(--gold-light); }
+.doutora__foto img { width: 100%; max-width: 480px; margin-inline: auto; }
+
+/* --- Perguntas frequentes --- */
+.faq__lista { max-width: 714px; margin: 20px auto 0; }
+.faq__item { margin-bottom: 12px; }
+.faq__item summary {
+  display: flex; align-items: center; gap: 12px;
+  padding: 18px 22px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: #F1ECE2;
+  font-size: 15.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  cursor: pointer;
+  list-style: none;
+  transition: border-color 0.25s ease;
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary span { flex: 1; text-align: center; }
+.faq__item summary .icone { width: 0.4em; height: 1em; color: var(--gold); transition: transform 0.25s ease; }
+.faq__item[open] summary { border-color: var(--line-strong); border-radius: 14px 14px 0 0; color: var(--gold); }
+.faq__item[open] summary .icone { transform: rotate(-90deg); }
+.faq__item summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.faq__resposta {
+  padding: 18px 22px 22px;
+  background: #1C1917;
+  border: 1px solid var(--line);
+  border-top: 0;
+  border-radius: 0 0 14px 14px;
+  font-size: 15.5px;
+}
+
+/* --- Instagram --- */
+.instagram__texto { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; padding-left: 97px; }
+.instagram__texto .botao { min-width: 250px; }
+.instagram__foto img { width: 68%; margin-inline: auto; filter: drop-shadow(0 18px 34px rgba(24, 22, 20, 0.14)); }
+
+/* --- Localização --- */
+.local__texto .titulo { margin-bottom: 20px; }
+.local__texto a { color: var(--gold-light); text-decoration: none; border-bottom: 1px solid var(--line-strong); }
+.local__texto a:hover { color: var(--gold); }
+.local__mapa { border: 1px solid var(--line); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-dark); }
+.local__mapa iframe { display: block; width: 100%; height: 300px; border: 0; filter: grayscale(0.35) contrast(1.04); }
+
+/* --- Dúvidas e contatos --- */
+.contatos { padding-block: var(--space-band); background: var(--black-deep); border-top: 1px solid var(--line); }
+.contatos .subtitulo { margin-bottom: 20px; }
+
+/* --- Rodapé --- */
+.rodape { padding: 44px 0 34px; background: var(--black-footer); border-top: 1px solid var(--line); text-align: center; }
+.rodape__marca { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 12px; }
+.rodape__marca img { width: 64px; height: 64px; object-fit: contain; }
+.rodape__marca .marca__nome { height: 46px; }
+.rodape__cro { margin-bottom: 18px; color: #A79E8F; font-size: 13px; letter-spacing: 0.08em; }
+.rodape__copy { color: #6F685E; font-size: 12px; }
+
+/* ============ 5. Responsivo ============ */
+
+/* Tablet e celular */
+@media (max-width: 1024px) {
+  /* Menu vira botão */
+  .menu { display: flex; flex-direction: column; align-items: center; }
+  .menu__botao {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 33px; height: 33px; padding: 5.5px;
+    border: 0; background: transparent; color: var(--gold); font-size: 22px; cursor: pointer;
+  }
+  .menu__lista { display: none; flex-direction: column; width: calc(100% + 20px); margin: 10px -10px -10px; background: var(--black-deep); border-top: 1px solid var(--line); }
+  .menu.is-aberto .menu__lista { display: flex; }
+  .menu__lista li + li::before { display: none; }
+  .menu__lista a { padding: 13px 20px; font-size: 15px; text-align: center; }
+  .menu__lista a::after { display: none; }
+  .menu__lista a:hover { background: var(--panel); }
+
+  /* Abertura empilhada: foto abaixo do texto */
+  .hero {
+    background: var(--black) url("../img/hero/hero-stack.webp") center bottom / min(100%, 760px) auto no-repeat;
+    padding-top: 36px;
+    padding-bottom: calc(min(100vw, 760px) * 0.9);
+  }
+  .hero__conteudo { max-width: 640px; margin-inline: auto; padding-inline: 24px; text-align: center; }
+  .hero .marca { justify-content: center; }
+  .hero__texto { margin-inline: auto; }
+
+  .comparativo .container { padding-inline: 34px; }
+  .comparativo .titulo { margin-bottom: 56px; }
+
+  .depoimentos__grade { grid-template-columns: repeat(2, minmax(0, 315px)); }
+  .depoimentos__grade img:last-child { grid-column: 1 / -1; justify-self: center; width: calc(50% - 20px); }
+
+  .criancas { background: var(--porcelain); min-height: 0; display: block; }
+  .criancas__texto p { max-width: none; }
+  .criancas__foto { display: block; }
+
+  .beneficios__cards { grid-template-columns: repeat(2, minmax(0, 283px)); justify-content: center; }
+  .card-beneficio:last-child { grid-column: 1 / -1; justify-self: center; width: 283px; }
+
+  .faq__lista { max-width: 46%; }
+}
+
+/* Tablet (só) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .depoimentos__grade { gap: 40px; }
+}
+
+/* Celular */
+@media (max-width: 767px) {
+  :root { --space-section: 72px; --space-band: 60px; }
+  body { font-size: 15.5px; }
+  .container { padding: 20px; }
+  .duas-colunas, .etapa, .comparativo__cards { grid-template-columns: 1fr; }
+  .duas-colunas { row-gap: 31px; }
+  .titulo, .subtitulo { text-align: center; }
+
+  .botao { padding: 15px 22px; font-size: 14px; }
+
+  .hero__conteudo { padding: 10px 4px 0; }
+  .marca { gap: 14px; }
+  .marca__monograma { width: 76px; height: 76px; }
+  .marca__nome { height: 44px; }
+  .hero__titulo { margin-top: 20px; }
+  .hero__texto { font-size: 15.5px; }
+
+  .equipe__texto { text-align: center; }
+  .equipe__foto img { max-width: none; width: calc(100% + 20px); margin-inline: -10px; }
+
+  .comparativo .container { padding-inline: 16px; }
+  .comparativo .titulo { margin-bottom: 40px; }
+  .card-comparativo { padding: 20px; margin-inline: 20px; }
+  .comparativo__cards { gap: 18px; }
+
+  .casos__intro { margin-top: 20px; }
+  .casos__grade { grid-template-columns: 1fr; row-gap: 61px; margin-top: 51px; }
+  .caso__nome { font-size: 15.5px; }
+
+  .faixa__conteudo, .faixa__texto { text-align: center; }
+  .faixa__foto img { max-width: none; width: calc(100% + 20px); margin-inline: -10px; }
+
+  .depoimentos__grade { grid-template-columns: 1fr; gap: 37px; justify-items: center; }
+  .depoimentos__grade img, .depoimentos__grade img:last-child { width: 100%; max-width: 330px; grid-column: auto; }
+
+  .etapa { row-gap: 10px; }
+  .etapa--invertida .etapa__foto { order: 0; }
+  .etapa__texto { text-align: center; }
+  .etapa__foto img { max-width: 300px; }
+  .seta .icone { width: 56px; height: 56px; }
+
+  .criancas__texto { text-align: center; }
+  .criancas__foto img { width: calc(100% + 20px); margin-inline: -10px; max-width: none; }
+
+  .beneficios__cards { grid-template-columns: 1fr; gap: 18px; }
+  .card-beneficio:last-child { width: auto; }
+
+  .doutora__conteudo { margin-top: 30px; }
+  .doutora__foto { order: -1; }
+  .doutora__texto { padding-top: 0; }
+
+  .faq__lista { max-width: none; }
+  .faq__item summary { padding: 16px 18px; }
+
+  .instagram__texto { align-items: center; padding-left: 0; }
+  .instagram__foto img { width: 252px; }
+
+  .local__texto { text-align: center; }
+  .local__mapa { margin-inline: -9px; }
+
+  .contatos .subtitulo { text-align: left; }
+  .contatos .duas-colunas { row-gap: 40px; }
+
+  .rodape__marca img { width: 52px; height: 52px; }
+  .rodape__marca .marca__nome { height: 38px; }
+}
+
+@media (max-width: 380px) {
+  .botao { padding: 14px 18px; font-size: 13px; letter-spacing: 0.01em; }
+  .marca__monograma { width: 64px; height: 64px; }
+  .marca__nome { height: 38px; }
+  .rodape__marca .marca__nome { height: 32px; }
+}
+
+/* ============ 6. Ajustes finos de espaçamento ============ */
+.casos__intro, .depoimentos__intro, .etapas__intro { margin-top: 34px; }
+.faq__lista { margin-top: 34px; }
+.comparativo .titulo { margin-bottom: 84px; }
+.card-comparativo .subtitulo { margin-bottom: 38px; }
+.card-comparativo__midia { margin: 0 0 40px; }
+.card-comparativo .lista-icones li { padding-block: 11px; }
+.casos__grade { margin-bottom: 30px; }
+.depoimentos .acao { margin-top: 59px; }
+.seta { margin: 11px 0 35px; }
+.acao--etapas { margin-bottom: 75px; }
+.beneficios__cards { margin-top: 84px; }
+.beneficios .acao { margin-top: 76px; }
+.doutora .titulo { margin: 10px 10px 0; }
+.doutora { padding-bottom: calc(var(--space-section) + 20px); }
+.faq__item { margin-bottom: 7px; }
+.instagram__texto { margin-right: -10px; }
+.faixa__texto { margin-inline: -10px; }
+
+/* Tablet e desktop */
+@media (min-width: 768px) {
+  .etapa { grid-template-columns: 1.05fr 1fr; column-gap: 40px; padding-inline: 10px; }
+  .etapa--invertida { grid-template-columns: 1fr 1.05fr; column-gap: 20px; padding: 0 10px 0 30px; }
+  .faixa__conteudo .titulo, .depoimentos .titulo, .etapas .titulo { margin-inline: 139px; }
+}
+
+/* Só desktop */
+@media (min-width: 1025px) {
+  .criancas { min-height: 610px; }
+  .doutora__conteudo { margin-top: 94px; padding-inline: 10px; grid-template-columns: 530px 1fr; column-gap: 30px; }
+  .faixa--dupla .duas-colunas { grid-template-columns: 550px 1fr; }
+}
+
+/* Só tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .depoimentos__grade, .beneficios__cards { display: flex; flex-wrap: wrap; justify-content: center; }
+  .depoimentos__grade { gap: 40px; }
+  .depoimentos__grade img, .depoimentos__grade img:last-child { width: calc(33.333% - 20px); grid-column: auto; }
+  .beneficios__cards { gap: 20px; }
+  .card-beneficio, .card-beneficio:last-child { width: calc(100% / 3); }
+  .criancas .container { min-height: 375px; }
+  .criancas__foto { align-self: start; }
+  .doutora__conteudo { margin-top: 75px; }
+  .doutora__foto { align-self: start; margin-top: 19px; }
+  .doutora__conteudo { padding-inline: 20px; column-gap: 10px; }
+  .doutora__foto { order: -1; }
+  .faq__lista { max-width: calc(46% + (100vw - 768px) * 0.53); }
+}
+
+/* Só celular */
+@media (max-width: 767px) {
+  .hero__conteudo { padding-top: 0; }
+  .hero__titulo { margin-top: 8px; }
+  .comparativo .titulo { margin: 30px 20px 84px; }
+  .card-comparativo .lista-icones { margin-bottom: 0; }
+  .card-comparativo .lista-icones li { padding-block: 7px; }
+  .acao--etapas { margin-top: 108px; margin-bottom: 50px; }
+  .beneficios .acao { margin-bottom: 50px; }
+  .doutora__conteudo.duas-colunas { row-gap: 10px; }
+  .doutora__foto img { width: min(330px, calc(100% - 10px)); max-width: none; }
+  .depoimentos__grade img, .depoimentos__grade img:last-child { width: min(330px, calc(100% - 10px)); max-width: none; }
+  .instagram__foto img { width: min(252px, 64.6vw); }
+  .casos .titulo, .beneficios .titulo { margin-top: 30px; }
+  .depoimentos .acao { margin-bottom: 52px; }
+  .criancas__texto { padding-top: 43px; }
+  .criancas__foto { margin-top: 29px; }
+  .doutora__conteudo { margin-top: 30px; }
+}
