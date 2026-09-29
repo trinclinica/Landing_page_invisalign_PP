@@ -202,6 +202,14 @@ ul { margin: 0; padding: 0; list-style: none; }
 .card-comparativo__img { width: auto; height: auto; object-fit: contain; }
 .card-comparativo__img--larga { max-width: 96%; max-height: 60%; }
 .card-comparativo__img--alta { max-width: 70%; max-height: 90%; }
+/* Foto do sorriso com aparelho: preenche a mesma área do card vizinho e se dissolve nas bordas */
+.card-comparativo__img--foto {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 50%;
+  border-radius: var(--radius-sm);
+  -webkit-mask-image: radial-gradient(ellipse 78% 82% at 50% 50%, #000 58%, transparent 100%);
+  mask-image: radial-gradient(ellipse 78% 82% at 50% 50%, #000 58%, transparent 100%);
+}
 
 /* --- Casos tratáveis (comparadores) --- */
 .casos__intro { max-width: 720px; margin: 20px auto 0; text-align: center; }
@@ -385,6 +393,24 @@ ul { margin: 0; padding: 0; list-style: none; }
 .rodape__cro { margin-bottom: 18px; color: #A79E8F; font-size: 13px; letter-spacing: 0.08em; }
 .rodape__copy { color: #6F685E; font-size: 12px; }
 
+/* --- Planejamento digital (iTero) --- */
+.itero__painel {
+  display: grid; grid-template-columns: 220px 1fr; gap: 48px; align-items: center;
+  max-width: 960px; margin-inline: auto;
+  padding: 48px 56px;
+  background: linear-gradient(135deg, #26211D 0%, var(--panel) 60%);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-dark);
+}
+.itero__visual { display: flex; justify-content: center; }
+.itero__icone { width: 180px; height: 180px; color: var(--gold); }
+.itero__varredura { animation: varredura 3.2s ease-in-out infinite; }
+@keyframes varredura { 0%, 100% { transform: translateY(-14px); opacity: .25; } 50% { transform: translateY(18px); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .itero__varredura { animation: none; } }
+.itero__rotulo { margin-bottom: 12px; color: var(--gold-light); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; }
+.itero__texto .titulo { margin-bottom: 20px; }
+
 /* ============ 5. Responsivo ============ */
 
 /* Tablet e celular */
@@ -448,7 +474,9 @@ ul { margin: 0; padding: 0; list-style: none; }
   .hero__conteudo { padding: 10px 4px 0; }
   .marca { gap: 14px; }
   .marca__monograma { width: 76px; height: 76px; }
-  .marca__nome { height: 44px; }
+  .marca__nome { height: 38px; }
+  .itero__painel { grid-template-columns: 1fr; gap: 24px; padding: 36px 24px; text-align: center; }
+  .itero__icone { width: 132px; height: 132px; }
   .hero__titulo { margin-top: 20px; }
   .hero__texto { font-size: 15.5px; }
 
@@ -499,13 +527,13 @@ ul { margin: 0; padding: 0; list-style: none; }
   .contatos .duas-colunas { row-gap: 40px; }
 
   .rodape__marca img { width: 52px; height: 52px; }
-  .rodape__marca .marca__nome { height: 38px; }
+  .rodape__marca .marca__nome { height: 36px; }
 }
 
 @media (max-width: 380px) {
   .botao { padding: 14px 18px; font-size: 13px; letter-spacing: 0.01em; }
   .marca__monograma { width: 64px; height: 64px; }
-  .marca__nome { height: 38px; }
+  .marca__nome { height: 33px; }
   .rodape__marca .marca__nome { height: 32px; }
 }
 

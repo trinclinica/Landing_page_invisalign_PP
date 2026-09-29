@@ -18,20 +18,22 @@
 
 /* ---------- Casos tratáveis: comparador antes/depois ----------
  * Ajuste de registro do render DEPOIS sobre o ANTES (somente translação), em pixels do
- * render de referência (960 x 720). Medido pelo centro do contorno externo do modelo.
- *   diastema 6/1, mordida cruzada 8/2, apinhamento 9/3: diferença só de posição.
- *   mordida aberta 0/0: diferença de 1 a 2 px, imperceptível.
- *   prognatismo 5/0: parte da diferença é mudança real do formato do modelo.
- *   mordida profunda 10/3: o modelo do DEPOIS é ~1% mais largo e ~2% mais alto; a sobra fica dividida.
+ * render de referência (960 x 720). Medido pelo contorno externo da arcada (topo, base e laterais):
+ * o valor centraliza o contorno do DEPOIS sobre o ANTES; quando os modelos têm larguras diferentes,
+ * a sobra fica dividida igualmente entre os dois lados.
+ *   diastema 3/0: só posição (resíduo < 1 px).
+ *   mordida cruzada 0/0, mordida aberta 1/-2, apinhamento -2/0: DEPOIS ~1–1,5% mais estreito (±4 a ±8 px).
+ *   prognatismo 1/1: DEPOIS ~2% mais estreito (±10 px nas laterais).
+ *   mordida profunda 0/-3: DEPOIS ~1% mais baixo na base (±4 px).
  */
 const RENDER_REF = { largura: 960, altura: 720 };
 const AJUSTES_3D = {
-  'diastema':         { x: 6,  y: 1 },
-  'mordida-cruzada':  { x: 8,  y: 2 },
-  'mordida-aberta':   { x: 0,  y: 0 },
-  'prognatismo':      { x: 5,  y: 0 },
-  'apinhamento':      { x: 9,  y: 3 },
-  'mordida-profunda': { x: 10, y: 3 },
+  'diastema':         { x: 3,  y: 0 },
+  'mordida-cruzada':  { x: 0,  y: 0 },
+  'mordida-aberta':   { x: 1,  y: -2 },
+  'prognatismo':      { x: 1,  y: 1 },
+  'apinhamento':      { x: -2, y: 0 },
+  'mordida-profunda': { x: 0,  y: -3 },
 };
 
 function iniciarComparador(el) {
