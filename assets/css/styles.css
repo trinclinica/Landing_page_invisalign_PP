@@ -395,19 +395,24 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 /* --- Planejamento digital (iTero) --- */
 .itero__painel {
-  display: grid; grid-template-columns: 220px 1fr; gap: 48px; align-items: center;
-  max-width: 960px; margin-inline: auto;
-  padding: 48px 56px;
+  display: grid; grid-template-columns: minmax(0, 400px) 1fr; align-items: stretch;
+  max-width: 1040px; margin-inline: auto;
+  overflow: hidden;
   background: linear-gradient(135deg, #26211D 0%, var(--panel) 60%);
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-dark);
 }
-.itero__visual { display: flex; justify-content: center; }
-.itero__icone { width: 180px; height: 180px; color: var(--gold); }
-.itero__varredura { animation: varredura 3.2s ease-in-out infinite; }
-@keyframes varredura { 0%, 100% { transform: translateY(-14px); opacity: .25; } 50% { transform: translateY(18px); opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .itero__varredura { animation: none; } }
+/* Foto sangrando na lateral do painel e se dissolvendo no fundo */
+.itero__visual { position: relative; min-height: 460px; background: #140c07; }
+.itero__foto {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; max-width: none;
+  object-fit: cover; object-position: 50% 30%;
+  -webkit-mask-image: linear-gradient(90deg, #000 72%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 72%, transparent 100%);
+}
+.itero__texto { align-self: center; padding: 56px 56px 56px 32px; }
 .itero__rotulo { margin-bottom: 12px; color: var(--gold-light); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; }
 .itero__texto .titulo { margin-bottom: 20px; }
 
@@ -475,8 +480,10 @@ ul { margin: 0; padding: 0; list-style: none; }
   .marca { gap: 14px; }
   .marca__monograma { width: 76px; height: 76px; }
   .marca__nome { height: 38px; }
-  .itero__painel { grid-template-columns: 1fr; gap: 24px; padding: 36px 24px; text-align: center; }
-  .itero__icone { width: 132px; height: 132px; }
+  .itero__painel { grid-template-columns: 1fr; text-align: center; }
+  .itero__visual { min-height: 0; aspect-ratio: 4 / 4.2; background: transparent; }
+  .itero__foto { object-position: 50% 22%; -webkit-mask-image: linear-gradient(180deg, #000 74%, transparent 100%); mask-image: linear-gradient(180deg, #000 74%, transparent 100%); }
+  .itero__texto { padding: 8px 24px 36px; }
   .hero__titulo { margin-top: 20px; }
   .hero__texto { font-size: 15.5px; }
 
@@ -572,6 +579,9 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 /* Só tablet */
 @media (min-width: 768px) and (max-width: 1024px) {
+  .itero__painel { grid-template-columns: minmax(0, 300px) 1fr; }
+  .itero__visual { min-height: 420px; }
+  .itero__texto { padding: 40px 36px 40px 20px; }
   .depoimentos__grade, .beneficios__cards { display: flex; flex-wrap: wrap; justify-content: center; }
   .depoimentos__grade { gap: 40px; }
   .depoimentos__grade img, .depoimentos__grade img:last-child { width: calc(33.333% - 20px); grid-column: auto; }
