@@ -3,6 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Consentimento (Consent Mode v2): padrão negado, definido antes do GTM -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  analytics_storage: 'denied',
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  wait_for_update: 500
+});
+gtag('set', 'ads_data_redaction', true);
+(function(){
+  try {
+    var c = JSON.parse(localStorage.getItem('pp-consentimento'));
+    if (c && c.versao === 1) {
+      gtag('consent', 'update', {
+        analytics_storage: c.analise ? 'granted' : 'denied',
+        ad_storage: c.marketing ? 'granted' : 'denied',
+        ad_user_data: c.marketing ? 'granted' : 'denied',
+        ad_personalization: c.marketing ? 'granted' : 'denied'
+      });
+    }
+  } catch (e) {}
+})();
+</script>
 <!-- Google Tag Manager -->
 <script>
 (function(w,d,s,l,i){
@@ -484,10 +510,50 @@ l22.2402 -22.2402c12.2803 -12.29 12.2803 -32.2002 0 -44.4795z"/></symbol>
       <svg class="marca__nome" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 124" role="img" aria-label="Clínica Patrícia Peclat, Odontologia e Estética Facial"><defs><linearGradient id="ppOuroRodape" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E4D8A8"/><stop offset=".5" stop-color="#CCC084"/><stop offset="1" stop-color="#A8894E"/></linearGradient></defs><line x1="1" y1="12" x2="1" y2="112" stroke="#CCC084" stroke-opacity=".55" stroke-width="1.5"/><text x="30" y="66" textLength="722" lengthAdjust="spacing" font-family="Cormorant Garamond, Georgia, serif" font-size="46" font-weight="600" fill="url(#ppOuroRodape)">CLÍNICA PATRÍCIA PECLAT</text><text x="32" y="101" font-family="Montserrat, Arial, sans-serif" font-size="15" font-weight="500" letter-spacing="4.4" fill="#E4D8A8" fill-opacity=".85">ODONTOLOGIA E ESTÉTICA FACIAL</text></svg>
     </div>
     <p class="rodape__cro">Cirurgiã-dentista · CRO-RJ 21550</p>
+    <p class="rodape__links"><button class="rodape__link" type="button" data-consentimento="abrir">Preferências de cookies</button></p>
     <p class="rodape__copy">© 2026 Dra. Patrícia Peclat. Todos os direitos reservados.</p>
   </div>
 </footer>
 
+<!-- Consentimento de cookies -->
+<section class="consentimento" id="consentimento" role="region" aria-label="Aviso de cookies" hidden>
+  <p class="consentimento__texto">Utilizamos cookies necessários para o funcionamento do site e, com sua autorização, cookies de análise e publicidade para entender o desempenho da página e melhorar nossas campanhas.</p>
+  <p class="consentimento__politicas" hidden><a data-politica="privacidade" hidden>Política de Privacidade</a> <a data-politica="cookies" hidden>Política de Cookies</a></p>
+  <div class="consentimento__acoes">
+    <button type="button" class="consentimento__botao consentimento__botao--aceitar" data-consentimento="aceitar">Aceitar todos</button>
+    <button type="button" class="consentimento__botao consentimento__botao--recusar" data-consentimento="recusar">Recusar não essenciais</button>
+    <button type="button" class="consentimento__botao consentimento__botao--texto" data-consentimento="personalizar">Personalizar</button>
+  </div>
+</section>
+
+<div class="consentimento-painel" id="consentimento-preferencias" hidden>
+  <div class="consentimento-painel__caixa" role="dialog" aria-modal="true" aria-labelledby="consentimento-titulo" tabindex="-1">
+    <button type="button" class="consentimento-painel__fechar" data-consentimento="fechar" aria-label="Fechar preferências">&times;</button>
+    <h2 class="consentimento-painel__titulo" id="consentimento-titulo">Preferências de cookies</h2>
+    <p class="consentimento-painel__intro">Escolha quais categorias você autoriza. Você pode alterar essa escolha a qualquer momento pelo link no rodapé.</p>
+    <ul class="consentimento-painel__lista">
+      <li class="consentimento-opcao">
+        <div><p class="consentimento-opcao__nome">Necessários</p><p class="consentimento-opcao__desc">Essenciais para o funcionamento do site e para lembrar sua escolha de cookies.</p></div>
+        <span class="consentimento-opcao__fixo">Sempre ativos</span>
+      </li>
+      <li class="consentimento-opcao">
+        <label for="consentimento-analise"><span class="consentimento-opcao__nome">Análise</span><span class="consentimento-opcao__desc">Ferramentas como o Google Analytics, para entender como a página é usada.</span></label>
+        <input class="consentimento-opcao__chave" type="checkbox" id="consentimento-analise" name="analise">
+      </li>
+      <li class="consentimento-opcao">
+        <label for="consentimento-marketing"><span class="consentimento-opcao__nome">Marketing</span><span class="consentimento-opcao__desc">Publicidade e medição de campanhas, como Meta Pixel e Google Ads.</span></label>
+        <input class="consentimento-opcao__chave" type="checkbox" id="consentimento-marketing" name="marketing">
+      </li>
+    </ul>
+    <p class="consentimento__politicas" hidden><a data-politica="privacidade" hidden>Política de Privacidade</a> <a data-politica="cookies" hidden>Política de Cookies</a></p>
+    <div class="consentimento-painel__acoes">
+      <button type="button" class="consentimento__botao consentimento__botao--recusar" data-consentimento="recusar">Recusar não essenciais</button>
+      <button type="button" class="consentimento__botao consentimento__botao--aceitar" data-consentimento="salvar">Salvar preferências</button>
+    </div>
+  </div>
+</div>
+
 <script src="assets/js/main.js"></script>
+<script src="assets/js/consentimento.js"></script>
 </body>
 </html>
