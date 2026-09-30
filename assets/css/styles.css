@@ -409,7 +409,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   .instagram__texto { align-items: center; padding-left: 0; margin-right: 0; text-align: center; }
   .instagram__perfis { max-width: 460px; }
   .perfil-ig { text-align: left; }
-  .instagram .instagram__foto img { width: 100%; max-width: 380px; }
+  .instagram .instagram__foto img { width: 100%; max-width: 300px; height: auto; }
 }
 @media (max-width: 767px) {
   .equipe__texto .botao { margin-bottom: 8px; }
@@ -423,7 +423,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   .perfil-ig__seguir-texto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .perfil-ig__seguir .icone { font-size: 16px; }
 }
-.instagram__foto img { width: 68%; margin-inline: auto; filter: drop-shadow(0 18px 34px rgba(24, 22, 20, 0.14)); }
+.instagram__foto img { width: min(300px, 62%); height: auto; margin-inline: auto; filter: drop-shadow(0 18px 34px rgba(24, 22, 20, 0.14)); }
 
 /* --- Localização --- */
 .local__texto .titulo { margin-bottom: 20px; }
@@ -534,9 +534,10 @@ ul { margin: 0; padding: 0; list-style: none; }
   .marca__monograma { width: 76px; height: 76px; }
   .marca__nome { height: 38px; }
   .itero__painel { grid-template-columns: 1fr; text-align: center; }
-  .itero__visual { min-height: 0; aspect-ratio: 4 / 4.2; background: transparent; }
-  .itero__foto { object-position: 50% 22%; -webkit-mask-image: linear-gradient(180deg, #000 74%, transparent 100%); mask-image: linear-gradient(180deg, #000 74%, transparent 100%); }
-  .itero__texto { padding: 8px 24px 36px; }
+  /* Imagem no fluxo normal (altura pela proporção do próprio arquivo), abaixo do texto */
+  .itero__visual { order: 2; min-height: 0; background: transparent; padding: 0 20px 28px; }
+  .itero__foto { position: static; display: block; width: 100%; max-width: 420px; height: auto; margin: 0 auto; object-fit: contain; border-radius: var(--radius-sm); -webkit-mask-image: none; mask-image: none; }
+  .itero__texto { order: 1; padding: 36px 24px 24px; }
   .hero__titulo { margin-top: 20px; }
   .hero__texto { font-size: 15.5px; }
 
@@ -633,7 +634,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* Só tablet */
 @media (min-width: 768px) and (max-width: 1024px) {
   .itero__painel { grid-template-columns: minmax(0, 300px) 1fr; }
-  .itero__visual { min-height: 420px; }
+  .itero__visual { min-height: 0; display: flex; align-items: center; }
+  .itero__foto { position: static; width: 100%; height: auto; object-fit: contain; }
   .itero__texto { padding: 40px 36px 40px 20px; }
   .depoimentos__grade, .beneficios__cards { display: flex; flex-wrap: wrap; justify-content: center; }
   .depoimentos__grade { gap: 40px; }
