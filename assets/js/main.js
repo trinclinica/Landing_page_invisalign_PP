@@ -22,18 +22,18 @@
  * o valor centraliza o contorno do DEPOIS sobre o ANTES; quando os modelos têm larguras diferentes,
  * a sobra fica dividida igualmente entre os dois lados.
  *   diastema 3/0: só posição (resíduo < 1 px).
- *   mordida cruzada 0/0, mordida aberta 1/-2, apinhamento -2/0: DEPOIS ~1–1,5% mais estreito (±4 a ±8 px).
- *   prognatismo 1/1: DEPOIS ~2% mais estreito (±10 px nas laterais).
- *   mordida profunda 0/-3: DEPOIS ~1% mais baixo na base (±4 px).
+ *   mordida aberta 21/1, apinhamento 13/1, mordida cruzada -11/3: só posição (resíduo de 1 a 3 px).
+ *   prognatismo 3/1: contorno alinhado; a arcada inferior muda de forma no tratamento (diferença local).
+ *   mordida profunda 13/0: DEPOIS ~4% mais alto (±13 px no topo e na base).
  */
 const RENDER_REF = { largura: 960, altura: 720 };
 const AJUSTES_3D = {
-  'diastema':         { x: 3,  y: 0 },
-  'mordida-cruzada':  { x: 0,  y: 0 },
-  'mordida-aberta':   { x: 1,  y: -2 },
-  'prognatismo':      { x: 1,  y: 1 },
-  'apinhamento':      { x: -2, y: 0 },
-  'mordida-profunda': { x: 0,  y: -3 },
+  'diastema':         { x: 3,   y: 0 },
+  'mordida-cruzada':  { x: -11, y: 3 },
+  'mordida-aberta':   { x: 21,  y: 1 },
+  'prognatismo':      { x: 3,   y: 1 },
+  'apinhamento':      { x: 13,  y: 1 },
+  'mordida-profunda': { x: 13,  y: 0 },
 };
 
 function iniciarComparador(el) {
