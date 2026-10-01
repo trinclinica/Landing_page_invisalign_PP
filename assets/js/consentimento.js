@@ -38,7 +38,16 @@
   });
 
   const aplicar = (escolha) => {
+    const marketingJaConcedido = !!(ler() || {}).marketing;   // escolha salva antes desta ação
     gtag('consent', 'update', estados(escolha));
+    // Depois do Consent Mode em granted: avisa o GTM (liberação do Meta Pixel).
+    // Só na transição para "concedido", então salvar de novo a mesma escolha não repete o evento.
+    if (escolha.marketing && !marketingJaConcedido) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'marketing_consent_granted'
+      });
+    }
     window.dataLayer.push({ event: 'consentimento_atualizado', consentimento_analise: !!escolha.analise, consentimento_marketing: !!escolha.marketing });
     gravar(escolha);
     fecharBanner();
